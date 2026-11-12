@@ -4,11 +4,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LandingPage from './pages/LandingPage'; // 1. Import Landing Page
 import Login from './pages/Login';
 import Register from './pages/Register';
-import VerifyEmail from './pages/VerifyEmail';
 const Dashboard = lazy(() => import('./pages/dashboard'));
 import Metodologi from './pages/metodologi';
 import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 import TimPeneliti from './pages/TimPeneliti';
 import TentangRiset from './pages/TentangRiset';
 import UbahPassword from './pages/UbahPassword';
@@ -27,13 +25,13 @@ function App() {
         
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/verify" element={<VerifyEmail />} />
+        <Route path="/verify" element={<Navigate to="/login" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/metodologi" element={<Metodologi />} />
         <Route path="/tim-peneliti" element={<TimPeneliti />} />
         <Route path="/tentang-riset" element={<TentangRiset />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-password" element={<Navigate to="/forgot-password" replace />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/ubah-password" element={<UbahPassword />} />
         <Route path="/riwayat" element={<Riwayat />} />

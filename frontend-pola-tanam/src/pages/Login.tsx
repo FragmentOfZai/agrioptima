@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [notVerifiedEmail, setNotVerifiedEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const pesanSukses = (location.state as { pesan?: string } | null)?.pesan;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMsg("");
-    setNotVerifiedEmail("");
     try {
       const response = await fetch("https://agrioptima-backend-production.up.railway.app/api/auth/login", {
         method: "POST",
@@ -24,12 +24,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-        if (response.status === 403) {
-          setNotVerifiedEmail(email);
-          setErrorMsg("Akun belum diverifikasi. Silakan cek email Anda untuk kode OTP.");
-        } else {
-          setErrorMsg(data.message);
-        }
+        setErrorMsg(data.message);
         setLoading(false);
         return;
       }
@@ -72,15 +67,11 @@ const Login: React.FC = () => {
         {errorMsg && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded text-sm text-center font-medium">
             {errorMsg}
-            {notVerifiedEmail && (
-              <button
-                type="button"
-                onClick={() => navigate("/verify", { state: { email: notVerifiedEmail } })}
-                className="block w-full mt-2 text-sm font-bold text-white bg-amber-500 hover:bg-amber-600 rounded-lg py-2 px-4 transition-colors"
-              >
-                Masukkan Kode OTP Sekarang
-              </button>
-            )}
+          </div>
+        )}
+        {pesanSukses && !errorMsg && (
+          <div className="mb-4 p-3 bg-green-50 border border-green-300 text-green-700 rounded text-sm text-center font-medium">
+            {pesanSukses}
           </div>
         )}
 

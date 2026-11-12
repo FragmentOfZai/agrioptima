@@ -44,9 +44,9 @@ const Register: React.FC = () => {
         return;
       }
 
-      // 2. Jika sukses, arahkan ke halaman verifikasi
-      setSuccessMsg('Pendaftaran berhasil! Silakan cek kotak masuk email Anda untuk kode verifikasi OTP.');
-      navigate('/verify', { state: { email: email } }); 
+      // 2. Jika sukses, akun langsung aktif: arahkan ke halaman login
+      setSuccessMsg('Pendaftaran berhasil! Akun Anda sudah aktif.');
+      navigate('/login', { state: { pesan: 'Pendaftaran berhasil! Akun Anda sudah aktif, silakan masuk.' } });
       
     } catch (error) {
       console.error('Error menghubungkan ke server:', error);
