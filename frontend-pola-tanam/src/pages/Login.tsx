@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE } from '../config';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login: React.FC = () => {
@@ -17,7 +18,7 @@ const Login: React.FC = () => {
     setLoading(true);
     setErrorMsg("");
     try {
-      const response = await fetch("https://agrioptima-backend-production.up.railway.app/api/auth/login", {
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

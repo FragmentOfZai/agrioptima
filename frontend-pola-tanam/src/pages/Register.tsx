@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
@@ -28,7 +29,7 @@ const Register: React.FC = () => {
 
     try {
       // 1. Mengirim data ke Backend Node.js menggunakan fetch()
-      const response = await fetch('https://agrioptima-backend-production.up.railway.app/api/auth/register', {
+      const response = await fetch(`${API_BASE}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

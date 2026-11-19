@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config';
 import Navbar from '../components/navbar';
 import FormSimulasi from '../components/FormSimulasi';
 import GrafikHasil from '../components/GrafikHasil';
@@ -42,7 +43,7 @@ const Dashboard: React.FC = () => {
     const token = localStorage.getItem('agrioptima_token');
     if (token) {
       try {
-        await fetch('https://agrioptima-backend-production.up.railway.app/api/history', {
+        await fetch(`${API_BASE}/api/history`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config';
 import Navbar from '../components/navbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +25,7 @@ const Profil: React.FC = () => {
       }
 
       try {
-        const response = await fetch('https://agrioptima-backend-production.up.railway.app/api/auth/profile', {
+        const response = await fetch(`${API_BASE}/api/auth/profile`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config';
 import Navbar from '../components/navbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +29,7 @@ const Riwayat: React.FC = () => {
 
       try {
         // PERHATIAN: Endpoint ini akan kita bangun di backend pada tahap selanjutnya
-        const response = await fetch('https://agrioptima-backend-production.up.railway.app/api/history', {
+        const response = await fetch(`${API_BASE}/api/history`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -105,7 +106,7 @@ const Riwayat: React.FC = () => {
                         })}
                       </td>
                       <td className="py-4 px-6 text-gray-600">
-                        {item.luas_lahan} m²
+                        {Number(item.luas_lahan).toLocaleString('id-ID')} ha
                       </td>
                       <td className="py-4 px-6 text-gray-800 font-semibold">
                         {item.rekomendasi_pola}
@@ -116,7 +117,7 @@ const Riwayat: React.FC = () => {
                         </span>
                       </td>
                       <td className="py-4 px-6 text-right font-bold text-agri-green">
-                        Rp {item.estimasi_pendapatan.toLocaleString('id-ID')}
+                        Rp {Number(item.estimasi_pendapatan).toLocaleString('id-ID')}
                       </td>
                       <td className="py-4 px-6 text-center">
                         <button className="text-[#00a3e0] hover:text-blue-800 font-semibold text-xs transition">

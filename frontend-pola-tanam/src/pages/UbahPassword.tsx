@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config';
 import Navbar from '../components/navbar';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +33,7 @@ const UbahPassword: React.FC = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://agrioptima-backend-production.up.railway.app/api/auth/change-password', {
+      const response = await fetch(`${API_BASE}/api/auth/change-password`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
