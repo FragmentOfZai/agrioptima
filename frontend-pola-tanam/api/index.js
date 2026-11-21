@@ -87,7 +87,10 @@ function ambilPengguna(req) {
 
 export default async function handler(req, res) {
   try {
-    const path = new URL(req.url, 'http://localhost').pathname.replace(/\/+$/, '');
+    const u = new URL(req.url, 'http://localhost');
+    // vercel.json meneruskan /api/* ke fungsi ini dengan parameter ?route=...
+    const rute = u.searchParams.get('route');
+    const path = (rute !== null ? '/api/' + rute : u.pathname).replace(/\/+$/, '');
     const metode = req.method;
 
     if (path === '/api/health') return kirim(res, 200, { status: 'ok' });
